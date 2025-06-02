@@ -20,6 +20,9 @@
   #define sleep(seconds) Sleep((seconds)*1000)
 #else
   #include <libusb.h>
+  #include <unistd.h>   // for sleep()
+
+  #define fork() (0)
 #endif
 
 #include "FrameParser.h"

@@ -10,6 +10,8 @@ pub fn build(b: *std.Build) void {
         .optimize = optimize,
     });
 
+    const libusb_art = libusb_dep.artifact("usb");
+
     // Create the WiFiDriver library
     const wifi_driver = b.addStaticLibrary(.{
         .name = "WiFiDriver",
@@ -65,7 +67,7 @@ pub fn build(b: *std.Build) void {
     wifi_driver.installHeadersDirectory(b.path("hal"), "", .{ .include_extensions = &.{".h"} });
 
     // Link with libusb dependency
-    wifi_driver.linkLibrary(libusb_dep.artifact("usb"));
+    wifi_driver.linkLibrary(libusb_art);
     wifi_driver.linkLibC();
 
     // Install the library
@@ -90,7 +92,7 @@ pub fn build(b: *std.Build) void {
     });
 
     wifi_driver_demo.linkLibrary(wifi_driver);
-    wifi_driver_demo.linkLibrary(libusb_dep.artifact("usb"));
+    wifi_driver_demo.linkLibrary(libusb_art);
     wifi_driver_demo.linkLibCpp();
     wifi_driver_demo.linkLibC();
 
@@ -115,7 +117,7 @@ pub fn build(b: *std.Build) void {
     });
 
     wifi_driver_tx_demo.linkLibrary(wifi_driver);
-    wifi_driver_tx_demo.linkLibrary(libusb_dep.artifact("usb"));
+    wifi_driver_tx_demo.linkLibrary(libusb_art);
     wifi_driver_tx_demo.linkLibCpp();
     wifi_driver_tx_demo.linkLibC();
 
@@ -125,8 +127,10 @@ pub fn build(b: *std.Build) void {
         wifi_driver.root_module.addCMacro("WIN_GNU", "");
         wifi_driver_demo.root_module.addCMacro("WIN_GNU", "");
         wifi_driver_tx_demo.root_module.addCMacro("WIN_GNU", "");
+    } else if (target.result.os.tag == .linux) {
+        libusb_art.linkSystemLibrary("libudev");
     }
-    // Create run steps for executables
+    // Create run steps for execliutables
     const run_demo_cmd = b.addRunArtifact(wifi_driver_demo);
     run_demo_cmd.step.dependOn(b.getInstallStep());
 
