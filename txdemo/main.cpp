@@ -12,6 +12,12 @@
 #elif defined(__ANDROID__)
   // On Android, include the libusb header as required.
   #include <libusb.h>
+#elif defined(WIN_GNU)
+  #include <libusb.h>
+  #include <windows.h>
+  #include <process.h>
+  #define fork() (0)
+  #define sleep(seconds) Sleep((seconds)*1000)
 #else
   #include <libusb-1.0/libusb.h>
 #endif

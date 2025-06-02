@@ -10,12 +10,18 @@
 typedef unsigned int u32;
 typedef unsigned short u16;
 typedef unsigned char u8;
-#ifdef _MSC_VER
-typedef uint16_t __le16;
-typedef uint32_t __le32;
+#if defined(_MSC_VER)
+    // MSVC specific definitions
+    typedef uint16_t __le16;
+    typedef uint32_t __le32;
+#elif defined(WIN_GNU)
+    // MinGW/GNU on Windows definitions
+    typedef uint16_t __le16;
+    typedef uint32_t __le32;
 #else
-typedef u16 __le16;
-typedef u32 __le32;
+    // Other platforms (Linux, etc.)
+    typedef u16 __le16;
+    typedef u32 __le32;
 #endif
 
 #ifndef le16_to_cpu
