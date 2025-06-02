@@ -4,7 +4,7 @@
 #if defined(__ANDROID__) || defined(_MSC_VER) || defined(WIN_GNU)
 #include <libusb.h>
 #else
-#include <libusb-1.0/libusb.h>
+#include <libusb.h>
 #endif
 #include "FrameParser.h"
 #include "Hal8812PhyReg.h"
