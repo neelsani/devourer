@@ -37,8 +37,13 @@
     // internet connectivity.
     .dependencies = .{
         .libusb = .{
-            .url = "git+https://github.com/platypro/libusb#c154a65f608d493c9932b18c5e1af0066158c620",
-            .hash = "libusb-1.0.26-Isb-fWGNFwAYe8r-hpdD7ImrYkVbxqfN5UpuxoMvQ3XF",
+            .url = "git+https://github.com/neelsani/libusb#b39a6d16f6331692681ffce19642088a6780e7f7",
+            .hash = "libusb-1.0.29-zGe-yRNFAAAGQv2sbKap_1xE7EzJ3Hbv9lvhBk2tccpU",
+        },
+        .emsdk = .{
+            .url = "git+https://github.com/emscripten-core/emsdk?ref=4.0.9#3bcf1dcd01f040f370e10fe673a092d9ed79ebb5",
+            .hash = "N-V-__8AAJl1DwBezhYo_VE6f53mPVm00R-Fk28NPW7P14EQ",
+            .lazy = true,
         },
     },
     .paths = .{
