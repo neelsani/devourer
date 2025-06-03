@@ -26,6 +26,10 @@ fn emSdkSetupStep(b: *std.Build, emsdk: *std.Build.Dependency) !?*std.Build.Step
 pub fn build(b: *std.Build) void {
     var target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
+
+    const enable_logging = b.option(bool, "logging", "Enable logging") orelse true;
+    const enable_debug_logging = b.option(bool, "debug-logging", "Enable debug logging") orelse false;
+   
     if (target.result.os.tag == .emscripten) {
         target = b.resolveTargetQuery(.{
             .cpu_arch = .wasm32,
@@ -43,6 +47,8 @@ pub fn build(b: *std.Build) void {
     const libusb_dep = b.dependency("libusb", .{
         .target = target,
         .optimize = optimize,
+        .logging = enable_logging,
+        .@"debug-logging" = enable_debug_logging,
     });
 
     const libusb_art = libusb_dep.artifact("usb-1.0");
