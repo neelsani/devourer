@@ -37,8 +37,8 @@
     // internet connectivity.
     .dependencies = .{
         .libusb = .{
-            .url = "git+https://github.com/neelsani/libusb#31ca556652f74fb3da51325f164ef285fca5e69a",
-            .hash = "libusb-1.0.29-zGe-yRNFAAAGQv2sbKap_1xE7EzJ3Hbv9lvhBk2tccpU",
+            .url = "git+https://github.com/neelsani/libusb#dd28adad4737e9b737d2d40d78f929e331b3181a",
+            .hash = "libusb-1.0.29-zGe-yS9FAAAh7g5sVpqHCqldeMQUowp53b0Qp4qoqUrx",
         },
         .emsdk = .{
             .url = "git+https://github.com/emscripten-core/emsdk?ref=4.0.9#3bcf1dcd01f040f370e10fe673a092d9ed79ebb5",
